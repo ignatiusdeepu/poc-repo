@@ -1,0 +1,18 @@
+box: maven:latest
+command-timeout: 30
+no-response-timeout: 15
+
+workflows:
+  - name: build-and-test
+    pipelines:
+      - name: build
+
+build:
+  base-path: /go/src/github.com/wercker/wercker
+  steps:
+    - xenoterracide/maven:
+        goals: clean install docker:build
+    - script: 
+        name: copy package to output
+        code: |
+              cp ./target/*.jar $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar
