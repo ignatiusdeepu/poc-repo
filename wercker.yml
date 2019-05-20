@@ -11,7 +11,7 @@ build:
   base-path: /go/src/github.com/wercker/wercker
   steps:
     - xenoterracide/maven:
-        goals: clean install docker:build
+        goals: clean package spring-boot:repackage
     - script: 
         name: copy package to output
         code: |
