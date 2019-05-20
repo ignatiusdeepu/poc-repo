@@ -35,7 +35,7 @@ push-to-oci-registry:
         password: $OCIR_PASSWORD    
         repository: $OCIR_REPOSITORY 
         tag: latest
-        registry: https://$OCIR_REGISTRY/v2
+        registry: https://$OCIR_REGISTRY/
         cmd: java -jar /bpmlinks-poc.jar
     
     
