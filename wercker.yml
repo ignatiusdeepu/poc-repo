@@ -20,7 +20,7 @@ build:
         code: |
               cp ./target/*.jar $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar
               
-push:
+push-to-oci-registry:
   box:
     id: openjdk
     tag: 8-jre-alpine
