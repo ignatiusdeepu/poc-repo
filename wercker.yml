@@ -6,6 +6,9 @@ workflows:
   - name: build-and-test
     pipelines:
       - name: build
+      - name: push
+        requires:
+          - build
 
 build:
   base-path: /go/src/github.com/wercker/wercker
@@ -16,3 +19,26 @@ build:
         name: copy package to output
         code: |
               cp ./target/*.jar $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar
+              
+push:
+  box:
+    id: openjdk
+    tag: 8-jre-alpine
+  steps:
+    - script:
+        name: Move the jar to current dir
+        code: |
+            mv $WERCKER_SOURCE_DIR/bpmlinks-poc.jar /bpmlinks-poc.jar
+            touch /bpmlinks-poc.jar
+    - internal/docker-push: 
+        username: $OCIR_USERNAME
+        password: $OCIR_PASSWORD    
+        repository: $OCIR_REPOSITORY 
+        tag: latest
+        registry: https://$OCIR_REGISTRY/v2
+        cmd: java -jar /bpmlinks-poc.jar
+    
+    
+    
+               
+              
