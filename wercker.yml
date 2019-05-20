@@ -3,10 +3,10 @@ command-timeout: 30
 no-response-timeout: 15
 
 workflows:
-  - name: build-and-test
+  - name: build-and-push
     pipelines:
       - name: build
-      - name: push
+      - name: push-to-oci-registry
         requires:
           - build
 
