@@ -28,7 +28,7 @@ push-to-oci-registry:
     - script:
         name: Move the jar to current dir
         code: |
-            mv $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar /bpmlinks-poc.jar
+            mv $WERCKER_SOURCE_DIR/bpmlinks-poc.jar /bpmlinks-poc.jar
             touch /bpmlinks-poc.jar
     - internal/docker-push: 
         username: $OCIR_USERNAME
@@ -38,7 +38,6 @@ push-to-oci-registry:
         registry: https://$OCIR_REGISTRY/
         cmd: java -jar /bpmlinks-poc.jar
         ports: 8085
-    
     
     
                
