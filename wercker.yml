@@ -19,7 +19,7 @@ build:
         name: copy package to output
         code: |
               echo $WERCKER_OUTPUT_DIR
-              cd /pipeline/output
+              pwd
               ls -lrt
               cd ../..
               cp ./target/*.jar $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar
