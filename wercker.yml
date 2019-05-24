@@ -18,6 +18,7 @@ build:
     - script: 
         name: copy package to output
         code: |
+              echo $WERCKER_OUTPUT_DIR
               cp ./target/*.jar $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar
               
 push-to-oci-registry:
@@ -28,6 +29,8 @@ push-to-oci-registry:
     - script:
         name: Move the jar to current dir
         code: |
+            echo $WERCKER_SOURCE_DIR
+            pwd
             mv $WERCKER_SOURCE_DIR/bpmlinks-poc.jar /bpmlinks-poc.jar
             touch /bpmlinks-poc.jar
     - internal/docker-push: 
@@ -36,8 +39,10 @@ push-to-oci-registry:
         repository: $OCIR_REPOSITORY 
         tag: latest
         registry: https://$OCIR_REGISTRY/
+        volumes: /tmp
         cmd: java -jar /bpmlinks-poc.jar
         ports: 8085
+        
     
     
                
