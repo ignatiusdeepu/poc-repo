@@ -21,7 +21,6 @@ build:
               echo $WERCKER_OUTPUT_DIR
               pwd
               ls -lrt
-              cd ../..
               cp ./target/*.jar $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar
               
 push-to-oci-registry:
