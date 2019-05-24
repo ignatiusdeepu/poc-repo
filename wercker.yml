@@ -19,6 +19,9 @@ build:
         name: copy package to output
         code: |
               echo $WERCKER_OUTPUT_DIR
+              cd /pipeline/output
+              ls -lrt
+              cd ../..
               cp ./target/*.jar $WERCKER_OUTPUT_DIR/bpmlinks-poc.jar
               
 push-to-oci-registry:
@@ -30,7 +33,7 @@ push-to-oci-registry:
         name: Move the jar to current dir
         code: |
             echo $WERCKER_SOURCE_DIR
-            pwd
+            ls -lrt
             mv $WERCKER_SOURCE_DIR/bpmlinks-poc.jar /bpmlinks-poc.jar
             touch /bpmlinks-poc.jar
     - internal/docker-push: 
